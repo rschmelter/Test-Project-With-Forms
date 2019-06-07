@@ -8,7 +8,7 @@ include("inc/header.php"); ?>
     <div class="wrapper">
         <h1>Suggest a Media Item</h1>
         <p>If I&rsquo;m missing something, complete the form to send an email</p>
-        <form method="post">
+        <form method="post" action="process.php">
             <table>
             <tr>
                 <th><label for="name">Name</label></th>
