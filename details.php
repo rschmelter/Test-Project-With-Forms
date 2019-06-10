@@ -23,6 +23,13 @@ include("inc/header.php"); ?>
 
     <div class="wrapper">
         
+        <div class="breadcrumbs">
+            <a href="catalog.php">Full Catalog</a>
+            &gt; <a href="catalog.php?cat=<?php echo strtolower($item["category"]); ?>">
+            <?php echo $item["category"]; ?></a>
+            &gt; <?php echo $item["title"]; ?>
+        </div>
+        
         <div class="media-picture">
     
         <span>
@@ -32,8 +39,10 @@ include("inc/header.php"); ?>
         </div>
         
         <div class="media-details">
+        
             <h1><?php echo $item["title"]; ?></h1>
             <table>
+            
                 <tr>
                     <th>Category</th>
                     <td><?php echo $item["category"]; ?></td>
@@ -50,7 +59,7 @@ include("inc/header.php"); ?>
                     <th>Year</th>
                     <td><?php echo $item["year"]; ?></td>
                 </tr>
-                <?php if(strtolower($item["category"]) == "books") { ?>
+                <?php if (strtolower($item["category"]) == "books") { ?>
                 <tr>
                     <th>Authors</th>
                     <td><?php echo implode(", ",$item["authors"]); ?></td>
@@ -62,8 +71,8 @@ include("inc/header.php"); ?>
                 <tr>
                     <th>ISBN</th>
                     <td><?php echo $item["isbn"]; ?></td>
-                </tr>
-                <?php } else if(strtolower($item["category"]) == "movies") { ?>
+                </tr>    
+                <?php } else if (strtolower($item["category"]) == "movies") { ?>
                 <tr>
                     <th>Director</th>
                     <td><?php echo $item["director"]; ?></td>
@@ -76,13 +85,14 @@ include("inc/header.php"); ?>
                     <th>Stars</th>
                     <td><?php echo implode(", ",$item["stars"]); ?></td>
                 </tr>
-                <?php } else if(strtolower($item["category"]) == "music") { ?>
+                <?php } else if (strtolower($item["category"]) == "music") { ?>
                 <tr>
                     <th>Artist</th>
                     <td><?php echo $item["artist"]; ?></td>
                 </tr>
                 <?php } ?>
             </table>
+        
         </div>
     
     </div>
