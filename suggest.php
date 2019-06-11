@@ -21,15 +21,28 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         exit;
     }
 
-    echo "<pre>";
+ 
     $email_body = "";
     $email_body .= "Name " . $name . "\n";
     $email_body .= "Email " . $email . "\n";
     $email_body .= "Details " . $details . "\n";
-    echo $email_body;
-    echo "</pre>";
-    //To Do: Send Email
 
+    //To Do: Send Email
+    $mail = new PHPMailer;
+    
+    //It's important not to use the submitter's address as the from address as it's forgery,
+    //which will cause your messages to fail SPF checks.
+    //Use an address in your own domain as the from address, put the submitter's address in a reply-to
+    $mail->setFrom('rschmelter33@gmail.com', $name);
+    $mail->addReplyTo($email, $name);
+    $mail->addAddress('rschmelter33@gmail.com');
+ 
+    $mail->Subject = 'Library Suggestion from' . $name;
+    $mail->Body = $email_body;
+    if (!$mail->send()) {
+        echo "Mailer Error: " . $mail->ErrorInfo;
+        exit;
+    } 
     header("location:suggest.php?status=thanks");
 }
 
