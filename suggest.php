@@ -1,4 +1,8 @@
 <?php 
+use PHPMailer\PHPMailer\PHPMailer;
+require 'vendor/phpmailer/src/PHPMailer.php';
+require 'vendor/phpmailer/src/Exception.php';
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $name = trim(filter_input(INPUT_POST, "name", FILTER_SANITIZE_STRING));
     $email = trim(filter_input(INPUT_POST, "email", FILTER_SANITIZE_EMAIL));
@@ -10,6 +14,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
     if ($_POST["address"] != "") {
         echo "Bad form input";
+        exit;
+    }
+    if (!PHPMailer::validateAddress($email)) {
+        echo "Invalid Email Address";
         exit;
     }
 
